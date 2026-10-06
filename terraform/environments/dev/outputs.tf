@@ -12,3 +12,12 @@ output "private_subnet_ids" {
   value       = module.vpc.private_subnet_ids
   description = "List of Private Subnet IDs in Dev"
 }
+output "bastion_sg_id" {
+  value       = module.security.bastion_sg_id
+  description = "The ID of the Bastion Security Group in Dev"
+}
+
+output "internal_sg_id" {
+  value       = module.security.internal_sg_id
+  description = "The ID of the Internal Security Group in Dev"
+}
