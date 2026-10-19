@@ -31,3 +31,13 @@ output "eks_node_role_arn" {
   value       = module.iam.eks_node_role_arn
   description = "EKS Worker Nodes IAM Role ARN in Dev"
 }
+
+output "cluster_name" {
+  value       = module.eks.cluster_name
+  description = "EKS Cluster Name in Dev"
+}
+
+output "cluster_endpoint" {
+  value       = module.eks.cluster_endpoint
+  description = "EKS Cluster Endpoint in Dev"
+}

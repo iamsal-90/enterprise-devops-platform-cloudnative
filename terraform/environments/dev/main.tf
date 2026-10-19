@@ -38,3 +38,28 @@ module "iam" {
     Owner          = "DevOps-Team"
   }
 }
+
+module "eks" {
+  source = "../../modules/eks"
+
+  project_name     = var.project_name
+  environment      = var.environment
+  cluster_version  = "1.37"
+
+  
+  subnet_ids       = module.vpc.private_subnet_ids
+
+  
+  cluster_role_arn = module.iam.eks_cluster_role_arn
+  node_role_arn    = module.iam.eks_node_role_arn
+
+  instance_types   = ["t3.micro"]
+  desired_size     = 2
+  max_size         = 3
+  min_size         = 1
+
+  tags = {
+    Infrastructure = "Kubernetes"
+    Owner          = "DevOps-Team"
+  }
+}
