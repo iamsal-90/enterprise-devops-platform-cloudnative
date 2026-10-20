@@ -53,13 +53,23 @@ module "eks" {
   cluster_role_arn = module.iam.eks_cluster_role_arn
   node_role_arn    = module.iam.eks_node_role_arn
 
-  instance_types   = ["t3.micro"]
-  desired_size     = 2
-  max_size         = 3
-  min_size         = 1
+  instance_types   = ["t3.small"]
+  desired_size     = 4
+  max_size         = 5
+  min_size         = 3
 
   tags = {
     Infrastructure = "Kubernetes"
     Owner          = "DevOps-Team"
   }
+}
+
+module "argocd" {
+  source = "../../modules/argocd"
+
+  environment = var.environment
+
+  depends_on = [
+    module.eks
+  ]
 }
