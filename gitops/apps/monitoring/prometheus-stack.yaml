@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://prometheus-community.github.io/helm-charts'
     chart: kube-prometheus-stack
-    targetRevision: 58.2.2 
+    targetRevision: 55.5.0 
     helm:
       values: |
         grafana:
@@ -31,4 +31,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
+     # - ServerSideApply=true

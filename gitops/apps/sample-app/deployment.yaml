@@ -4,7 +4,7 @@ metadata:
   name: sample-nginx
   namespace: default
 spec:
-  replicas: 2
+  replicas: 2 # number of target group replicas
   selector:
     matchLabels:
       app: nginx
