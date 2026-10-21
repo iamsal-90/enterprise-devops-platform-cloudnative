@@ -26,11 +26,11 @@ resource "aws_subnet" "public" {
   availability_zone       = var.availability_zones[count.index]
   map_public_ip_on_launch = true
 
-  tags = merge(var.tags, {
-    Name                                             = "${var.project_name}-public-subnet-${var.availability_zones[count.index]}-${var.environment}"
-    "kubernetes.io/role/elb"                         = "1" # داک‌پپلاین EKS برای شناسایی پابلیک لودبالانسرها به این تگ نیاز دارد
-    "kubernetes.io/cluster/${var.project_name}-eks" = "shared"
-  })
+  tags = {
+    Name = "dev-public-subnet"
+    "kubernetes.io/cluster/edp-cluster-dev" = "shared"
+    "kubernetes.io/role/elb"                = "1"
+  }
 }
 
 # 4. Create Private Subnets
@@ -40,11 +40,11 @@ resource "aws_subnet" "private" {
   cidr_block        = var.private_subnet_cidrs[count.index]
   availability_zone = var.availability_zones[count.index]
 
-  tags = merge(var.tags, {
-    Name                                             = "${var.project_name}-private-subnet-${var.availability_zones[count.index]}-${var.environment}"
-    "kubernetes.io/role/internal-elb"                = "1" # داک‌پپلاین EKS برای شناسایی پرایویت لودبالانسرها به این تگ نیاز دارد
-    "kubernetes.io/cluster/${var.project_name}-eks" = "shared"
-  })
+  tags = {
+    Name = "dev-private-subnet"
+    "kubernetes.io/cluster/edp-cluster-dev" = "shared"
+    "kubernetes.io/role/internal-elb"       = "1"
+  }
 }
 
 # 5. Create Elastic IP for NAT Gateway
