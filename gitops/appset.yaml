@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         repoURL: 'https://github.com/iamsal-90/enterprise-devops-platform-cloudnative.git'
-        revision: HEAD
+        revision: develop
         directories:
           - path: gitops/apps/*
           - path: gitops/apps/*/*
@@ -18,7 +18,7 @@ spec:
       project: default
       source:
         repoURL: 'https://github.com/iamsal-90/enterprise-devops-platform-cloudnative.git'
-        targetRevision: HEAD
+        targetRevision: develop
         path: '{{path}}'
       destination:
         server: 'https://kubernetes.default.svc'
