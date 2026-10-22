@@ -9,7 +9,7 @@ spec:
         repoURL: 'https://github.com/iamsal-90/enterprise-devops-platform-cloudnative.git'
         revision: develop
         directories:
-          - path: gitops/apps/*
+        # - path: gitops/apps/*
           - path: gitops/apps/*/*
   template:
     metadata:

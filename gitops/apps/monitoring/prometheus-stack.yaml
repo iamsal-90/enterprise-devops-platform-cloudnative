@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-stack
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    chart: kube-prometheus-stack
+    targetRevision: 55.5.0 
+    helm:
+      values: |
+        grafana:
+          adminPassword: "admin-secure-password" 
+          service:
+            type: ClusterIP
+        prometheus:
+          prometheusSpec:
+            retention: 1d
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+     # - ServerSideApply=true
